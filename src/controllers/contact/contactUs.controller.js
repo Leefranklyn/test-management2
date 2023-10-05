@@ -17,7 +17,7 @@ export const sendContactUsMessage = async (req, res) => {
       message
     });
     await newContactUsMessage.save();
-    await contactUs(newContactUsMessage.email, newContactUsMessage.message);
+    await contactUs(newContactUsMessage.name, newContactUsMessage.email, newContactUsMessage.message);
     res.status(200).json({
       success: true,
       message: "message sent successfully"
