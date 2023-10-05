@@ -28,7 +28,7 @@ app.use(
     },
   })
 );
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*', credentials: true }));
 
 process.env.NODE_ENV === "development" ? app.use(logger("dev")) : null;
 
