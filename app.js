@@ -28,7 +28,7 @@ app.use(
     },
   })
 );
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: 'https://enfavedu.netlify.app', credentials: true }));
 
 process.env.NODE_ENV === "development" ? app.use(logger("dev")) : null;
 
