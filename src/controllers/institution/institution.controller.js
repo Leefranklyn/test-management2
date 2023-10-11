@@ -304,7 +304,7 @@ export const getInstitutionBySubRoute = async (req,res) => {
         if(!institution) {
           return res.status(404).json({success: false, message: "Institution Not Found"});
         };
-      res,status(200).json({
+      res.status(200).json({
         success: true,
         institution: institution});
   }catch(error) {
