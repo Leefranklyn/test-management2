@@ -296,3 +296,23 @@ export const completeInstitutionRegistration = async (req, res) => {
     });
   }
 };
+
+export const getInstitutionBySubRoute = async (req,res) => {
+  try {
+      const subroute = req.params.subroute;
+      const institution = await Institution.findOne({ schoolUrl: subroute}).select("-adminPassword");
+        if(!institution) {
+          return res.status(404).json({success: false, message: "Institution Not Found"});
+        };
+      res,status(200).json({
+        success: true,
+        institution: institution});
+  }catch(error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed To Fetch Institution Data"
+    });
+  }
+};
+      
