@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {  requestAdminPasswordResetOTP, verifyAdminPasswordResetOTP, resetPassword, adminLogin, getAdmin, getAdminInstitution, getInstitutionTest, updateInstitutionAndAdmin, updateTest, updateTestQuestionImage, updateInstitutionAdminProfilePhoto, updateInstitutionSchoolLogo, updateInstitutionProprietorSignature } from "../../controllers/admin/admin.controller.js";
+import {  requestAdminPasswordResetOTP, verifyAdminPasswordResetOTP, resetPassword, adminLogin, getAdmin, getAdminInstitution, getInstitutionTest, updateInstitutionAndAdmin, updateTest, uploadTestQuestionImage, updateTestQuestionImage, updateInstitutionAdminProfilePhoto, updateInstitutionSchoolLogo, updateInstitutionProprietorSignature } from "../../controllers/admin/admin.controller.js";
 import { getAllUsers, getUsersWithResults } from "../../controllers/user/user.controller.js";
 import { verifyToken } from "../../middleware/jwt.js";
 import upload from "../../config/multer.js";
@@ -18,6 +18,7 @@ router.post("/adminprofilephoto/upload/:adminId", verifyToken("admin"), upload("
 router.post("/schoolLogo/upload/:adminId", verifyToken("admin"), upload("admin").single("schoolLogo"), updateInstitutionSchoolLogo);
 router.post("/proprietorsignature/upload/:adminId", verifyToken("admin"), upload("admin").single("proprietorSignature"), updateInstitutionProprietorSignature);
 router.patch("/update/:adminId", verifyToken("admin"), updateInstitutionAndAdmin);
-router.patch("/test/questionimage/upload/:adminId", verifyToken("admin"),upload("test").single("questionImage"), updateTestQuestionImage)
+router.patch("/test/questionimage/upload/:adminId", verifyToken("admin"),upload("test").single("questionImage"), uploadTestQuestionImage);
+router.patch("/test/questionimage/update/:adminId", verifyToken("admin"),upload("test").single("questionImage"), updateTestQuestionImage);
 router.patch("/test/update/:adminId", verifyToken("admin"), updateTest);
 export default router;
