@@ -479,7 +479,7 @@ export const updateInstitutionAndAdmin = async (req, res) => {
   }
 };
 
-export const updateTestQuestionImage = async (req, res) => {
+export const uploadTestQuestionImage = async (req, res) => {
   try {
     const adminId = req.params.adminId;
     const { questionId } = req.body;
@@ -521,6 +521,43 @@ export const updateTestQuestionImage = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error Uploading Image"
+    });
+  };
+};
+
+export const updateTestQuestionImage = async (req, res) => {
+  try{
+      const adminId = req.params.adminId;
+      const { questionId, questionImage } = req.body;
+  
+      const test = await Test.findOne({institution: adminId})
+      if (!test) {
+        return res.status(404).json({
+          success: false,
+          message: "Test not found",
+        });
+      };
+  
+        test.questions.forEach((question) => {
+        if (question._id.toString() === questionId) {
+          // Update the question's questionImage field
+          question.questionImage = questionImage;
+        }
+      });
+  
+      // Save the updated test
+      await test.save();
+  
+        res.status(200).json({
+        success: true,
+        message: "Updated Question Image Successfully",
+        test
+      });
+  }catch(error) {
+        console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error Updating questionImage"
     });
   };
 };
