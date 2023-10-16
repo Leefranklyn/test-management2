@@ -300,7 +300,7 @@ export const completeInstitutionRegistration = async (req, res) => {
 export const getInstitutionBySubRoute = async (req,res) => {
   try {
       const subroute = req.params.subroute;
-      const institution = await Institution.findOne({ schoolUrl: subroute}).select("-adminPassword");
+      const institution = await Institution.findOne({ schoolUrl: subroute });
         if(!institution) {
           return res.status(404).json({success: false, message: "Institution Not Found"});
         };
