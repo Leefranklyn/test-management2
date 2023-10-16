@@ -1,5 +1,6 @@
 export const userDetails = {
-  user: "enfavedu@gmail.com",
+  user: "okpidugada@gmail.com",
+  pass: "C0h2rOZ35nKGySqQ",
   clientId:
     "106323593172-or5ksui6a0j5g6qirkq7vf6nt4e2gvbd.apps.googleusercontent.com",
   clientSecret: "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",
