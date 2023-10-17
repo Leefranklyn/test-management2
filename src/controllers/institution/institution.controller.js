@@ -299,7 +299,7 @@ export const completeInstitutionRegistration = async (req, res) => {
 
 export const getInstitutionBySubRoute = async (req, res) => {
   try {
-    const { subRoute } = req.query;
+    const { subRoute } = req.params;
     console.log("subroute", subRoute)
     const institution = await Institution.findOne({schoolUrl: subRoute});
     console.log("Found institutions", institution);
