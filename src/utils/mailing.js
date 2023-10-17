@@ -94,7 +94,7 @@ export const contactUs = async (name, email, message) => {
     </div>
   `;
   return await sendEmail(
-    email,
+    "${name} <${email}>",
     "enfavedu@gmail.com",
     "Contact Us",
     html,
