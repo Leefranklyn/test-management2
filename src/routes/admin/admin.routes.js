@@ -19,6 +19,6 @@ router.post("/schoolLogo/upload/:adminId", verifyToken("admin"), upload("admin")
 router.post("/proprietorsignature/upload/:adminId", verifyToken("admin"), upload("admin").single("proprietorSignature"), updateInstitutionProprietorSignature);
 router.patch("/update/:adminId", verifyToken("admin"), updateInstitutionAndAdmin);
 router.patch("/test/questionimage/upload/:adminId", verifyToken("admin"),upload("test").single("questionImage"), uploadTestQuestionImage);
-router.patch("/test/questionimage/update/:adminId", verifyToken("admin"),upload("test").single("questionImage"), updateTestQuestionImage);
+router.patch("/test/questionimage/update/:adminId", verifyToken("admin"), updateTestQuestionImage);
 router.patch("/test/update/:adminId", verifyToken("admin"), updateTest);
 export default router;
