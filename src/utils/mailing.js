@@ -13,7 +13,7 @@ export const adminAndInstitutionRegistrationSuccess = async (
       <p>Hi ${firstName} ${lastName},</p>
       <p>We are pleased to inform you that your application to our platform was successful, and your institution, ${schoolName}, has been registered.</p>
       <p>Below is the URL that you will use to access your school portal:</p>
-      <a href="https://enfavedu.netlify.app/login" style="color: #007bff; text-decoration: none;">${schoolUrl}</a>
+      <a href="${schoolUrl}" style="color: #007bff; text-decoration: none;">${schoolUrl}</a>
       <p>Thank you for choosing our platform.</p>
       <p>Best Regards,<br>Enfavedu</p>
     </div>
@@ -69,7 +69,7 @@ export const userRegistrationSuccess = async (
       <p>You are now to proceed to the URL below and log in with the following credentials to take a test:</p>
       <p>User-Name: <strong>${userName}</strong></p>
       <p>Password: <strong>${password}</strong></p>
-      <p>Access the URL <a href="https://enfavedu.netlify.app/user/run" style="color: #007bff; text-decoration: none;">here</a>.</p>
+      <p>Access the URL <a href="${schoolUrl}" style="color: #007bff; text-decoration: none;">here</a>.</p>
       <p>Thank you for joining ${schoolName}!</p>
       <p>Best Regards,<br>Enfavedu</p>
     </div>

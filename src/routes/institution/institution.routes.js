@@ -9,7 +9,7 @@ router.get("/:institutionId", getAdminInstitutionToCompleteRegistration);
 router.post("/completeregistration/upload/schoollogo/:institutionId", upload("institution").single("schoolLogo"), completeInstitutionRegistrationSchoolLogo );
 router.post("/completeregistration/upload/proprietorsignature/:institutionId", upload("institution").single("proprietorSignature"), completeInstitutionRegistrationProprietorSignature );
 router.patch("/completeregistration/:institutionId", completeInstitutionRegistration );
-router.get("/:subroute", getInstitutionBySubRoute);
+router.get("/:subRoute", getInstitutionBySubRoute);
 
 
 export default router;

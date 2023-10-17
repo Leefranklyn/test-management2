@@ -244,6 +244,8 @@ const institutionSchema = new Schema(
     },
     schoolUrl: {
       type: String,
+      unique: true,
+      default: "",
       // required: true
     },
     schoolLogo: {

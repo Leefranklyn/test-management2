@@ -39,7 +39,7 @@ export const institutionAndAdminRegistration = async (req, res) => {
       adminPhone,
       adminPassword,
       adminGender,
-      adminDateOfBirth
+      adminDateOfBirth,
     } = req.body;
 
     const uppercaseCountry = country.toUpperCase();
@@ -83,7 +83,7 @@ export const institutionAndAdminRegistration = async (req, res) => {
       adminPhone,
       adminPassword: encryptedPassword,
       adminGender: uppercaseAdminGender,
-      adminDateOfBirth
+      adminDateOfBirth,
     });
 
     await newInstitution.save();
@@ -157,15 +157,15 @@ export const completeInstitutionRegistrationSchoolLogo = async (req, res) => {
   try {
     const id = req.params.institutionId;
     console.log(id);
-  
+
     const schoolLogo = req.file;
-  
+
     const schoolLogoUrl = schoolLogo.path;
-  
+
     res.status(200).json({
       success: true,
       message: "school logo uploaded successfully",
-      schoolLogoUrl: schoolLogoUrl
+      schoolLogoUrl: schoolLogoUrl,
     });
   } catch (error) {
     console.log(error);
@@ -174,23 +174,24 @@ export const completeInstitutionRegistrationSchoolLogo = async (req, res) => {
       message: "upload Failed",
     });
   }
-
 };
 
-
-export const completeInstitutionRegistrationProprietorSignature = async (req, res) => {
+export const completeInstitutionRegistrationProprietorSignature = async (
+  req,
+  res
+) => {
   try {
     const id = req.params.institutionId;
     console.log(id);
-  
+
     const proprietorSignature = req.file;
-  
+
     const proprietorSignatureUrl = proprietorSignature.path;
-  
+
     res.status(200).json({
       success: true,
       message: "proprietor signature uploaded successfully",
-      proprietorSignatureUrl: proprietorSignatureUrl
+      proprietorSignatureUrl: proprietorSignatureUrl,
     });
   } catch (error) {
     console.log(error);
@@ -199,7 +200,6 @@ export const completeInstitutionRegistrationProprietorSignature = async (req, re
       message: "upload Failed",
     });
   }
-
 };
 
 export const completeInstitutionRegistration = async (req, res) => {
@@ -232,7 +232,7 @@ export const completeInstitutionRegistration = async (req, res) => {
       schoolContactPhone,
       technicalContactEmail,
       technicalContactPhone,
-      proprietorSignature
+      proprietorSignature,
     } = req.body;
 
     const uppercaseCountry = country.toUpperCase();
@@ -266,7 +266,7 @@ export const completeInstitutionRegistration = async (req, res) => {
       schoolContactPhone: schoolContactPhone,
       technicalContactEmail: technicalContactEmail,
       technicalContactPhone: technicalContactPhone,
-      proprietorSignature: proprietorSignature
+      proprietorSignature: proprietorSignature,
     };
 
     const updatedInstitution = await Institution.findByIdAndUpdate(
@@ -280,13 +280,13 @@ export const completeInstitutionRegistration = async (req, res) => {
         success: false,
         message: "Institution not found",
       });
-    };
+    }
 
-    console.log(updatedInstitution)
+    console.log(updatedInstitution);
     res.json({
       success: true,
       message: "Admin And Institution Updated Successfully",
-      data: updatedInstitution
+      data: updatedInstitution,
     });
   } catch (error) {
     console.log(error);
@@ -297,22 +297,26 @@ export const completeInstitutionRegistration = async (req, res) => {
   }
 };
 
-export const getInstitutionBySubRoute = async (req,res) => {
+export const getInstitutionBySubRoute = async (req, res) => {
   try {
-      const subroute = req.params.subroute;
-      const institution = await Institution.findOne({ schoolUrl: subroute}).select("-adminPassword");
-        if(!institution) {
-          return res.status(404).json({success: false, message: "Institution Not Found"});
-        };
-      res.status(200).json({
-        success: true,
-        institution: institution});
-  }catch(error) {
-    console.log(error);
+    const { subRoute } = req.query;
+    console.log("subroute", subRoute)
+    const institution = await Institution.findOne({schoolUrl: subRoute});
+    console.log("Found institutions", institution);
+    if (!institution) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Institution Not Found" });
+    }
+    return res.status(200).json({
+      success: true,
+      institution: institution,
+    });
+  } catch (error) {
+    console.log("error", error);
     res.status(500).json({
       success: false,
-      message: "Failed To Fetch Institution Data"
+      message: "Failed To Fetch Institution Data",
     });
   }
 };
-      
