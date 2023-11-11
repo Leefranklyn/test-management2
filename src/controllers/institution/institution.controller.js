@@ -1,5 +1,6 @@
 import Institution from "../../models/institution/institution.model.js";
 import Test from "../../models/test/test.model.js";
+import schoolInfo from "../../models/schoolinfo/schoolinfo.model.js";
 import { formatZodError } from "../../utils/errorMessage.js";
 import {
   registrationValidator,
@@ -297,12 +298,85 @@ export const completeInstitutionRegistration = async (req, res) => {
   }
 };
 
+export const postSchoolInfo = async (req, res) => {
+  try {
+    const newSchoolInfo = new schoolInfo({
+      schoolUrl: req.body.schoolUrl,
+      schoolId: req.body.schoolId,
+    });
+
+    await newSchoolInfo.save();
+    res.status(200).json({
+      success: true,
+      message: "School Info Saved Successfully",
+      data: newSchoolInfo,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed To Post School Info",
+    });
+  }
+};
+
+export const getSchoolInfo = async (req, res) => {
+  try {
+    const getSchoolInfo = await schoolInfo.findOne({
+      schoolUrl: req.params.schoolUrl
+    });
+
+    if(!getSchoolInfo) {
+      return res.status(404).json({
+        success: false,
+        message: "School Info Not Found"
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "School Info Found",
+      data: getSchoolInfo,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed To Fetch School Info",
+    });
+  }
+};
+
 export const getInstitutionBySubRouteId = async (req, res) => {
   try {
     const institutionId = req.params.id;
-    console.log("id", institutionId)
+    console.log("id", institutionId);
     const institution = await Institution.findById(institutionId);
     console.log("Found institutions", institution);
+    if (!institution) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Institution Not Found" });
+    }
+    return res.status(200).json({
+      success: true,
+      institution: institution,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed To Fetch Institution Data",
+    });
+  }
+};
+
+export const getInstitutionBySubRoute = async (req, res) => {
+  try {
+    const subRoute = req.params.subRoute;
+    // console.log("id", subRoute)
+    const institution = await Institution.findOne({ schoolUrl: req.params.schoolUrl});
+    // console.log("Found institutions", institution);
     if (!institution) {
       return res
         .status(404)
