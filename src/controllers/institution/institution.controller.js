@@ -322,8 +322,12 @@ export const postSchoolInfo = async (req, res) => {
 
 export const getSchoolInfo = async (req, res) => {
   try {
+    const baseUrl = req.hostname === 'localhost' ? 'http://localhost:5173/user/' : 'https://enfavedu.netlify.app/user/';
+    const value = req.params.schoolUrl;
+    const fullUrl = `${baseUrl}${value}`;
+
     const getSchoolInfo = await schoolInfo.findOne({
-      schoolUrl: req.params.schoolUrl
+      schoolUrl: fullUrl
     });
 
     if(!getSchoolInfo) {
