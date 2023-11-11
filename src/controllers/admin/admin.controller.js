@@ -194,7 +194,6 @@ export const adminLogin = async (req, res) => {
       gender: admin.adminGender,
     };
 
-    req.session.adminId = admin._id;
     res.status(200).json({
       success: true,
       data: adminInfo,
