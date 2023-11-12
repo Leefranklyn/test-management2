@@ -112,6 +112,7 @@ export const institutionAndAdminRegistration = async (req, res) => {
       institution: newInstitution._id,
       testName: "Default Test",
       timer: 15,
+      schoolShortName: newInstitution.schoolShortName,
       questions: Array(15).fill(
         generateQuestion(
           "Geography Quiz",
