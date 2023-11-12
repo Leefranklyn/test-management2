@@ -85,7 +85,7 @@ export const userRegistrationSuccess = async (
 };
 
 
-export const contactUs = async (name, email, message) => {
+export const contactUs = async (name, email, schoolContactEmail, message) => {
   const html = `
     <div style="width: 70%; margin: 0 auto; background-color: #f7f7f7; padding: 20px; font-family: Arial, sans-serif; color: #333; text-align: left; border-radius: 10px;">
       <h2 style="color: #007bff;">Contact Us</h2>
@@ -95,7 +95,7 @@ export const contactUs = async (name, email, message) => {
   `;
   return await sendEmail(
     `${name} <${email}>`,
-    "enfavedu@gmail.com",
+    schoolContactEmail,
     "Contact Us",
     html,
     email
