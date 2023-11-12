@@ -260,15 +260,6 @@ export const submitUserResponse = async (req, res) => {
 
     await userResponse.save();
 
-    req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-        return res
-          .status(500)
-          .json({ success: false, message: "Error logging out" });
-      }
-    });
-
     res.status(200).json({ success: true, score: userResponse.score });
   } catch (error) {
     console.error(error);
