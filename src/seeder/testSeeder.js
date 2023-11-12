@@ -6,18 +6,20 @@ import { connectDB } from "../config/db.js";
 
 connectDB(process.env.MONGO_URL);
 
-const generateQuestion = (institution, questionText, questionImage, options) => ({
+const generateQuestion = (institution, questionTopic, questionText, questionImage, options) => ({
   institution,
+  questionTopic,
   questionText,
   questionImage,
   options: options.map((text, index) => ({ text, isCorrect: index === 0 })),
 });
 
 const defaultTestData = {
-  institution: "6502fcd57d2bdae1c66c6a01",
+  institution: "651b2cc95f3d35d395576943",
   testName: 'Default Test',
+  timer: 15,
   questions: Array(15).fill(
-    generateQuestion("null", 'What is the capital of France?', "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", ['Paris', 'London', 'Berlin', 'Madrid'])
+    generateQuestion("null", "General Knowledge", "What is the capital of France?", "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", ['Paris', 'London', 'Berlin', 'Madrid'])
   ),
 };
 

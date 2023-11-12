@@ -9,6 +9,11 @@ const testSchema = new Schema({
     type: String,
     required: true,
   },
+  timer: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   questions: [
     {
       questionTopic: {
