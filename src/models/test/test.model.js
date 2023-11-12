@@ -14,6 +14,10 @@ const testSchema = new Schema({
     required: true,
     default: 0,
   },
+  schoolShortName: {
+    type: String,
+    required: true
+  },
   questions: [
     {
       questionTopic: {
