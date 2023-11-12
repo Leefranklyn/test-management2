@@ -18,6 +18,7 @@ const defaultTestData = {
   institution: "651b2cc95f3d35d395576943",
   testName: 'Default Test',
   timer: 15,
+  schoolShortName: "Adin",
   questions: Array(15).fill(
     generateQuestion("null", "General Knowledge", "What is the capital of France?", "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", ['Paris', 'London', 'Berlin', 'Madrid'])
   ),
