@@ -576,15 +576,28 @@ export const updateTest = async (req, res) => {
     existingTest.testName = req.body.testName;
 
     // Iterate through the questions in the request body and update the corresponding questions in the test
-    req.body.questions.forEach((updatedQuestion) => {
-      const questionToUpdate = existingTest.questions.find((question) => question._id.toString() === updatedQuestion._id.toString());
-      if (questionToUpdate) {
-        // Update all fields except questionImage
-        questionToUpdate.questionTopic = updatedQuestion.questionTopic;
-        questionToUpdate.questionText = updatedQuestion.questionText;
-        questionToUpdate.options = updatedQuestion.options;
-      }
-    });
+req.body.questions.forEach((updatedQuestion) => {
+  const questionToUpdate = existingTest.questions.find((question) => question._id.toString() === updatedQuestion._id.toString());
+  if (questionToUpdate) {
+    if (updatedQuestion.questionText) {
+      questionToUpdate.questionText = updatedQuestion.questionText;
+    }
+    if (updatedQuestion.questionTopic) {
+      questionToUpdate.questionTopic = updatedQuestion.questionTopic;
+    }
+    if (updatedQuestion.options && updatedQuestion.options.length > 0) {
+      updatedQuestion.options.forEach((updatedOption) => {
+        const optionToUpdate = questionToUpdate.options.find((option) => option._id.toString() === updatedOption._id.toString());
+        if (optionToUpdate) {
+          // Update the option fields
+          optionToUpdate.optionText = updatedOption.optionText;
+          optionToUpdate.isCorrect = updatedOption.isCorrect;
+        }
+      });
+    }
+  }
+});
+
 
     // Save the updated test document
     const updatedTest = await existingTest.save();
