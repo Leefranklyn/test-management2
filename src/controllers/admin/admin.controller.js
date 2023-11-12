@@ -574,6 +574,8 @@ export const updateTest = async (req, res) => {
     };
 
     existingTest.testName = req.body.testName;
+    existingTest.timer = req.body.timer;
+
 
     // Iterate through the questions in the request body and update the corresponding questions in the test
 req.body.questions.forEach((updatedQuestion) => {
