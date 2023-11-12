@@ -590,7 +590,7 @@ req.body.questions.forEach((updatedQuestion) => {
         const optionToUpdate = questionToUpdate.options.find((option) => option._id.toString() === updatedOption._id.toString());
         if (optionToUpdate) {
           // Update the option fields
-          optionToUpdate.optionText = updatedOption.optionText;
+          optionToUpdate.text = updatedOption.text;
           optionToUpdate.isCorrect = updatedOption.isCorrect;
         }
       });
