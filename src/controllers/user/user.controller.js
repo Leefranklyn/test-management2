@@ -362,6 +362,7 @@ export const getUsersWithResults = async (req, res) => {
         return {
           firstName: user.firstName,
           lastName: user.lastName,
+          email: user.email,
           profilePhoto: user.profilePhoto,
           score: userResponse ? userResponse.score : null,
         };
