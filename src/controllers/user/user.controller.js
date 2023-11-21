@@ -137,7 +137,16 @@ export const userLoginAndStartTest = async (req, res) => {
         success: false,
         message: "Wrong UserName Or Password",
       });
-    }
+    };
+
+    const userResponse = await UserResponse.findOne({user: user._id});
+
+    if(userResponse) {
+      return res.status(403).json({
+        success: false, 
+        message: "User has Already Taken The Test"})
+
+    };
 
     const token = jwt.sign(
       {
