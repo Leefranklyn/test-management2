@@ -28,7 +28,7 @@ const app = express();
 //     },
 //   })
 // );
-app.use(cors({ origin: ['https://enfavedu.netlify.app', 'http://localhost:5173'], credentials: true}));
+app.use(cors({ origin: ['https://enfavedu.netlify.app', 'http://localhost:5173', 'https://enfavdu1.vercel.app'], credentials: true}));
 
 process.env.NODE_ENV === "development" ? app.use(logger("dev")) : null;
 
