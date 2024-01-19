@@ -1,13 +1,17 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({path: path.resolve(__dirname, "../../.env")});
 import { createTransport } from 'nodemailer';
-import { userDetails } from "./googleapi.js";
 
 const transporter = createTransport({
     host: "smtp-relay.brevo.com",
     port: 587,
     auth: {
-        user: userDetails.user,
-        pass: userDetails.pass,
+        user: process.env.BREVO_USER,
+        pass: process.env.BREVO_PASSWORD,
     },
 });
 
